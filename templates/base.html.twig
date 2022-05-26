@@ -13,7 +13,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="">
 
-  <title> Feane </title>
+  <title>{% block title %}{% endblock %}</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}" />
@@ -29,22 +29,25 @@
   <link href="{{asset('css/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{asset('css/responsive.css')}}" rel="stylesheet" />
-
+  {# ARREGLO #}
+  <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}" />
+  {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="{{asset('images/hero-bg.jpg')}}" alt="">
+      {# ARREGLO #}
+      {# <img src="{{asset('images/hero-bg.jpg')}}" alt=""> #}
     </div>
     <!-- header section strats -->
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{{path('home')}}">
             <span>
-              Feane
+              ZGAMING
             </span>
           </a>
 
@@ -58,7 +61,7 @@
                 <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="menu.html">Menu</a>
+                <a class="nav-link" href="{{path('producto.editar')}}">Productos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
@@ -139,8 +142,8 @@
       </div>
     </header>
     <!-- end header section -->
-{%block body %}
-{%endblock%}
+{% block body %}
+{% endblock %}
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">
@@ -175,7 +178,7 @@
         <div class="col-md-4 footer-col">
           <div class="footer_detail">
             <a href="" class="footer-logo">
-              Feane
+              Zgaming
             </a>
             <p>
               Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with

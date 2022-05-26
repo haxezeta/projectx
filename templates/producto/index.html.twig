@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Productos
+{% endblock %}
+
+{# {% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}" />
+{% endblock %} #}
+
+
+
+{% block body %}
+
+	<br>
+	<div class="container">
+		<h2>Lista de productos</h2>
+		<br>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>Nr</td>
+					<td>Nombre</td>
+					<td>Descripcion</td>
+					<td>Precio</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for producto in productos %}
+					<tr>
+						<td>{{producto.id}}</td>
+						<td>{{producto.nombre}}</td>
+						<td>{{producto.descripcion}}</td>
+						<td>{{producto.precio}}€</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

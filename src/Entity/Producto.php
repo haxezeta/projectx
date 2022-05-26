@@ -19,6 +19,9 @@ class Producto
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $descripcion;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $precio;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Producto
     public function setDescripcion(?string $descripcion): self
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getPrecio(): ?int
+    {
+        return $this->precio;
+    }
+
+    public function setPrecio(?int $precio): self
+    {
+        $this->precio = $precio;
 
         return $this;
     }
