@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Producto;
+use App\Form\ProductoTipo;
 use App\Repository\ProductoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 //Ej: producto.editar para llamar al método index y proudcto.crear para llamar al crearProducto
 #[Route('/producto', name: 'producto.')]
 class ProductoController extends AbstractController
-{
+{   
+    //FUNCION LISTAR PRODUCTOS
     #[Route('/', name: 'editar')]
     public function index(ProductoRepository $productoRepository)
     {
@@ -25,19 +27,42 @@ class ProductoController extends AbstractController
         ]);
     }
 
+    //FUNCION CREAR PRODUCTO
     #[Route('/crear', name: 'crear')]
     public function crearProducto(Request $request){
         $producto = new Producto();
-        $producto->setNombre('Death Stranding');
-        $producto->setDescripcion('El mejor juego');
-        $producto->setPrecio(40);
 
-        //EntityManager
+        //Formulario de producto
+        $form = $this->createForm(ProductoTipo::class, $producto);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($producto);
+            $entityManager->flush();
+
+            return $this->redirect($this->generateUrl('producto.editar')); 
+        }
+
+        return $this->render('producto/crear.html.twig', [
+            'crearForm' => $form->createView()
+        ]);
+    }
+
+    //FUNCION CREAR PRODUCTO
+    #[Route('/borrar/{id}', name: 'borrar')]
+    public function borrarProducto($id, ProductoRepository $productoRepository){
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($producto);
+        $producto = $productoRepository->find($id);
+        $entityManager->remove($producto);
         $entityManager->flush();
 
-        //Response
-        return new Response("Nuevo producto creado");
+        //Mensaje flash
+        $this->addFlash('exito', 'El producto se ha borrado con éxito');
+
+        return $this->redirect($this->generateUrl('producto.editar'));
     }
+    
+
+
 }

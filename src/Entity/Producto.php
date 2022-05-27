@@ -19,7 +19,7 @@ class Producto
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $descripcion;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(type: 'float', nullable: true)]
     private $precio;
 
     public function getId(): ?int
@@ -51,12 +51,12 @@ class Producto
         return $this;
     }
 
-    public function getPrecio(): ?int
+    public function getPrecio(): ?float
     {
         return $this->precio;
     }
 
-    public function setPrecio(?int $precio): self
+    public function setPrecio(?float $precio): self
     {
         $this->precio = $precio;
 

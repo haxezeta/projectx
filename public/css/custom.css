@@ -1,3 +1,7 @@
 .navbar { 
     background-color: black;
 }
+
+.bg-box {
+    position: relative;
+}
