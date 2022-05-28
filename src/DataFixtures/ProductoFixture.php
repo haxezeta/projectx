@@ -10,16 +10,16 @@ class ProductoFixture extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 10; $i++) {
-            $producto = new Producto();
-            $producto
-                ->setNombre('Product ' . $i)
-                ->setDescripcion('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
-                ->setPrecio(mt_rand(10, 500));
+        // for ($i = 1; $i <= 10; $i++) {
+        //     $producto = new Producto();
+        //     $producto
+        //         ->setNombre('Product ' . $i)
+        //         ->setDescripcion('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+        //         ->setPrecio(mt_rand(10, 500));
 
-            $manager->persist($producto);
-        }
+        //     $manager->persist($producto);
+        // }
 
-        $manager->flush();
+        // $manager->flush();
     }
 }

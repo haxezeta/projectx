@@ -9,10 +9,6 @@
 
 
 {% block body %}
-
-	{# {% for message in app.flashes('exito') %}
-										<div class="alert alert-"
-									{% endfor %} #}
 	<br>
 	<div class="container">
 		<h2>Lista de productos</h2>
@@ -23,6 +19,7 @@
 					<td>Nr</td>
 					<td>Nombre</td>
 					<td>Descripcion</td>
+					<td>Categoria</td>
 					<td>Precio</td>
 					<td></td>
 				</tr>
@@ -31,8 +28,10 @@
 				{% for producto in productos %}
 					<tr>
 						<td>{{producto.id}}</td>
-						<td>{{producto.nombre}}</td>
+						{# <td>{{producto.nombre}}</td> #}
+						<td><a href="{{ path ('producto.mostrar', {id: producto.id}) }}">{{producto.nombre}}</td>
 						<td>{{producto.descripcion}}</td>
+						<td>{{producto.categoria}}</td>
 						<td>{{producto.precio}}
 							€</td>
 						{# <td><a href="{{ path ('producto.borrar', {id: producto.id}) }}"><button type="button" class="btn btn-danger">Borrar</button></a></td> #}

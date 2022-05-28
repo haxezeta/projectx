@@ -22,6 +22,15 @@ class Producto
     #[ORM\Column(type: 'float', nullable: true)]
     private $precio;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
+    private $imagen;
+
+    #[ORM\ManyToOne(targetEntity: Categoria::class, inversedBy: 'productos')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $categoria;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +68,30 @@ class Producto
     public function setPrecio(?float $precio): self
     {
         $this->precio = $precio;
+
+        return $this;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(string $imagen): self
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    public function getCategoria(): ?Categoria
+    {
+        return $this->categoria;
+    }
+
+    public function setCategoria(?Categoria $categoria): self
+    {
+        $this->categoria = $categoria;
 
         return $this;
     }

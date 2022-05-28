@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 //Ej: producto.editar para llamar al método index y proudcto.crear para llamar al crearProducto
 #[Route('/producto', name: 'producto.')]
 class ProductoController extends AbstractController
-{   
+{
     //FUNCION LISTAR PRODUCTOS
     #[Route('/', name: 'editar')]
     public function index(ProductoRepository $productoRepository)
@@ -29,19 +29,35 @@ class ProductoController extends AbstractController
 
     //FUNCION CREAR PRODUCTO
     #[Route('/crear', name: 'crear')]
-    public function crearProducto(Request $request){
+    public function crearProducto(Request $request)
+    {
         $producto = new Producto();
 
         //Formulario de producto
         $form = $this->createForm(ProductoTipo::class, $producto);
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if ($form->isSubmitted()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $imagen = $form->get('imagen')->getData();
+            // $imagen = $request->files->get('producto')['imagen'];
+
+            //Para poder procesar las imagenes subidas a la base de datos
+            if ($imagen) {
+
+                $filename = md5(uniqid()) . '.' . $imagen->guessClientExtension();
+            }
+
+            $imagen->move(
+                $this->getParameter('img_carpeta'),
+                $filename
+            );
+
+            $producto->setImagen($filename);
             $entityManager->persist($producto);
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('producto.editar')); 
+            return $this->redirect($this->generateUrl('producto.editar'));
         }
 
         return $this->render('producto/crear.html.twig', [
@@ -51,18 +67,20 @@ class ProductoController extends AbstractController
 
     //FUNCION CREAR PRODUCTO
     #[Route('/borrar/{id}', name: 'borrar')]
-    public function borrarProducto($id, ProductoRepository $productoRepository){
+    public function borrarProducto($id, ProductoRepository $productoRepository)
+    {
         $entityManager = $this->getDoctrine()->getManager();
         $producto = $productoRepository->find($id);
         $entityManager->remove($producto);
-        $entityManager->flush();
-
-        //Mensaje flash
-        $this->addFlash('exito', 'El producto se ha borrado con éxito');
+        $entityManager->flush();   
 
         return $this->redirect($this->generateUrl('producto.editar'));
     }
-    
 
-
+    #[Route('/mostrar/{id}', name: 'mostrar')]
+    public function mostrarImagen(Producto $producto){
+        return $this->render('producto/mostrar.html.twig', [
+            'producto' => $producto
+        ]);
+    }
 }

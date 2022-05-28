@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulario
+{% endblock %}
+
+{# {% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}" />
+{% endblock %} #}
+
+
+
+{% block body %}
+
+	<br>
+	<div class="container">
+		<h1>{{producto.nombre}}</h1>
+		<img src="{{asset('img/' ~ producto.imagen)}}"
+	</div>
+{% endblock %}
+
+
