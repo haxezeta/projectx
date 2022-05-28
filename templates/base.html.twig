@@ -70,18 +70,21 @@
 											<span class="sr-only">(current)</span>
 										</a>
 									</li>
+									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 									<li class="nav-item">
 										<a class="nav-link" href="{{path('producto.editar')}}">Productos</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="{{path('producto.crear')}}">Formulario</a>
 									</li>
+									{% endif %}
 									<li class="nav-item">
 										<a class="nav-link" href="{{asset('about.html')}}">Empleados</a>
 									</li>
+
 								</ul>
 								<div class="user_option">
-									<a href="" class="user_link">
+									<a href="{{path('app_login')}}" class="user_link">
 										<i class="fa fa-user" aria-hidden="true"></i>
 									</a>
 									<a class="cart_link" href="#">
@@ -89,21 +92,21 @@
 											<g>
 												<g>
 													<path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-																										                   c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z"/>
+																																							                   c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z"/>
 												</g>
 											</g>
 											<g>
 												<g>
 													<path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-																										                   C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-																										                   c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-																										                   C457.728,97.71,450.56,86.958,439.296,84.91z"/>
+																																							                   C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+																																							                   c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+																																							                   C457.728,97.71,450.56,86.958,439.296,84.91z"/>
 												</g>
 											</g>
 											<g>
 												<g>
 													<path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-																										                   c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z"/>
+																																							                   c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z"/>
 												</g>
 											</g>
 											<g></g>
@@ -124,23 +127,45 @@
 										</svg>
 									</a>
 									<form class="form-inline">
-										<button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+										<button class="btn  my-2 my-sm-0 glyphicon glyphicon-off nav_search-btn" type="submit">
 											<i class="fa fa-search" aria-hidden="true"></i>
 										</button>
 									</form>
-									<a href="" class="order_online">
-										Order Online
-									</a>
+									{# <a href="{{path('app_registro')}}" class="order_online">
+																			Registrarse
+																		</a> #}
+									{% if app.user %}
+										{# <div class="mb-3">
+											Te has logueado como
+											{{ app.user.userIdentifier }},
+											<a href="{{ path('app_logout') }}">Logout</a>
+										</div> #}
+										<a href="{{path('app_logout')}}" class="order_online">
+																			LOGOUT <br>{{ app.user.userIdentifier }}
+																		</a>
+									{% endif %}
+									{% if not app.user %}
+										{# <div class="mb-3">
+											Te has logueado como
+											{{ app.user.userIdentifier }},
+											<a href="{{ path('app_logout') }}">Logout</a>
+										</div> #}
+										<a href="{{path('app_registro')}}" class="order_online">
+																			Registrarse
+																		</a>
+									{% endif %}
 								</div>
 							</div>
 						</nav>
+						{# {% if app.user %}
+							<div class="mb-3">
+									{{ app.user.userIdentifier }}
+							</div> 
+						{% endif %} #}
 					</div>
 				</header>
 				<!-- end header section -->
-				{% block body %}
-
-        
-        {% endblock %}
+				{% block body %}{% endblock %}
 				<!-- footer section -->
 				<footer class="footer_section">
 					<div class="container">
@@ -243,28 +268,28 @@
 				<script src="{{asset('js/custom.js')}}"></script>
 				<!-- Google Map -->
 				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-				
+
 				<!-- End Google Map -->
 			</body>
 		</body>
 	</html>
 
 	{# <!DOCTYPE html>
-		<html>
-			<head>
-				<meta charset="UTF-8">
-				<title>
-					{% block title %}Welcome!
-					{% endblock %}
-				</title>
-				<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-				<link
-				rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-				{% block stylesheets %}{% endblock %}
-				{% block javascripts %}{% endblock %}
-			</head>
-			<body>
-				<div class="container"> {% block body %}{% endblock %}
-					</div>
-				</body>
-			</html> #}
+			<html>
+				<head>
+					<meta charset="UTF-8">
+					<title>
+						{% block title %}Welcome!
+						{% endblock %}
+					</title>
+					<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+					<link
+					rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+					{% block stylesheets %}{% endblock %}
+					{% block javascripts %}{% endblock %}
+				</head>
+				<body>
+					<div class="container"> {% block body %}{% endblock %}
+						</div>
+					</body>
+				</html> #}
