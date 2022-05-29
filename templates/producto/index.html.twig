@@ -4,7 +4,8 @@
 {% endblock %}
 
 {# {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}" />
+ 		{{ parent() }}
+        <link href="{{ asset('css/custom.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %} #}
 
 
@@ -68,6 +69,7 @@
 			<button type="button" class="btn btn-primary">Añadir</button>
 		</a>
 	</div>
+	<br>
 
 {% endblock %}
 

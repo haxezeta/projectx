@@ -30,7 +30,7 @@ class CategoriaFixture extends Fixture
 
         //CATEGORIA 4 - PC GAMING
         $categoria4 = new Categoria();
-        $categoria4->setNombre("GAMING PC");
+        $categoria4->setNombre("GAMING");
         $manager->persist($categoria4);
 
         $manager->flush();
