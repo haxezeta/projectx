@@ -5,10 +5,16 @@
 
 {% block body %}
 
+
 	<!-- food section -->
 
 	<section class="food_section layout_padding-bottom">
 		<div class="container">
+			{% for message in app.flashes('pedido') %}
+				<div class="alert alert-success">
+					<h3>{{ message }}</h3>
+				</div>
+			{% endfor %}
 			<div class="heading_container heading_center">
 				<h2>
 					Catálogo
@@ -28,7 +34,7 @@
 				<li data-filter=".Accesorios">Accesorios</li>
 				<li data-filter=".Gaming">Gaming</li>
 			</ul>
-
+			
 			<div class="filters-content">
 				<div class="row grid">
                     {% for producto in productos %}
@@ -51,7 +57,8 @@
 										<h6>
 											{{producto.precio}} €
 										</h6>
-										<a href="">
+										<a href={{ path('app_carrito', {id: producto.id})}}>
+
 											<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
 												<g>
 													<g>

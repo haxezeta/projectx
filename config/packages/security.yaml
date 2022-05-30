@@ -35,6 +35,7 @@ security:
           - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/producto, roles: ROLE_USER }
           - { path: ^/registro  , roles: ROLE_USER }
+          - { path: ^/pedido  , roles: ROLE_USER }
 
 when@test:
     security:
