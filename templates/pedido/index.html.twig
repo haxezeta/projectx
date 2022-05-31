@@ -3,11 +3,18 @@
 {% block title %}Pedidos
 {% endblock %}
 
+{% block stylesheets %}
+<link href="{{ asset('css/customimg.css') }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset('css/footer.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
 
 	{# Esta variable es para calcular el total de los precios añadidos al carrito #}
 	{% set total = 0 %}
 
+	<br>
+	<br>
 	<br>
 	<div class="container">
 		<h2>Carrito</h2>

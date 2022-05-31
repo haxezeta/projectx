@@ -1,0 +1,13 @@
+.bg-box {
+    height: 6rem; /*Se adapta a la pantalla */
+    position: absolute;
+    top : 0;
+    left : 0;
+    overflow: hidden;
+    
+}  
+
+.bg-box img {
+    height: 100%;
+    object-position: top;
+}

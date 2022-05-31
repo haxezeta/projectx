@@ -1,20 +1,28 @@
 
 
-.navbar { 
+/* .navbar { 
     background-color: black!important;
     height: auto;
-}
+} */
 
- /* .bg-box {
-    position: relative;
-}  */
+  /* .bg-box {
+    height: 2 rem;
+    position: absolute;
+    top : 0;
+    left : 0;
+
+}   */
 
 /* .tituloJuegoCatalogo {
     text-align: center;
     color: darkturquoise;
 }
+*/
+ .footer_section { 
+    margin-bottom: -1px;
+}  
 
-.footer_section { 
-    position: fixed;
-    bottom: 0;
-} */
+body {
+    background-color: #fafafa;
+    min-height: 100vh;
+}

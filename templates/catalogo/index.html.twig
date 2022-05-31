@@ -3,6 +3,10 @@
 {% block title %}Catalogo
 {% endblock %}
 
+{% block stylesheets %}
+<link href="{{ asset('css/customimg.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
 
 
@@ -16,6 +20,7 @@
 				</div>
 			{% endfor %}
 			<div class="heading_container heading_center">
+			<br><br>
 				<h2>
 					Catálogo
 				</h2>
