@@ -15,6 +15,8 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class CustomAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -33,6 +35,7 @@ class CustomAuthenticator extends AbstractLoginFormAuthenticator
     {
         $email = $request->request->get('email', '');
 
+
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
@@ -49,6 +52,10 @@ class CustomAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
+        // $session = new Session();
+        // // set and get session attributes
+        // $session->set('name', 'Drak');
 
         // For example:
         // return new RedirectResponse($this->urlGenerator->generate('some_route'));

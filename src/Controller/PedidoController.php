@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pedido;
 use App\Entity\Producto;
+use App\Entity\Usuario;
 use App\Repository\PedidoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,16 @@ class PedidoController extends AbstractController
     #[Route('/pedido', name: 'app_pedido')]
     public function index(PedidoRepository $pedidoRepository): Response
     {
-
-        $pedido = $pedidoRepository->findBy(
-            ['usuario' => 'usuario1@gmail.com']
-        );
+        
+        $user = $this->getUser()->getUserIdentifier();
+        
+        if($user == 'admin@gmail.com') {
+            $pedido = $pedidoRepository->findAll();
+        } else {
+            $pedido = $pedidoRepository->findBy(
+                ['usuario' => $user]
+            );
+        }
 
         return $this->render('pedido/index.html.twig', [
             'pedidos' => $pedido
@@ -29,7 +36,9 @@ class PedidoController extends AbstractController
     {
         $pedido = new Pedido();
 
-        $pedido->setUsuario("usuario1@gmail.com");
+        $user = $this->getUser()->getUserIdentifier();
+
+        $pedido->setUsuario($user);
         $pedido->setNombre($producto->getNombre());
         $pedido->setPedido($producto->getId());
         $pedido->setPrecio($producto->getPrecio());
@@ -41,6 +50,10 @@ class PedidoController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('pedido', $pedido->getNombre() . ' se ha agregado al pedido');
+
+        // return $this->render('pedido/index.html.twig', [
+        //     'usuario' => $user
+        // ]);
 
         return $this->redirect($this->generateUrl('app_catalogo'));
     }

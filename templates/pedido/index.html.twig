@@ -31,6 +31,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				
 				{% for pedido in pedidos %}
 					{% set total = total + pedido.precio %}
 					<tr>
@@ -49,30 +50,33 @@
                             <button type="button" class="btn btn-secondary">{{pedido.estado}}</button>
                         {% endif %}
                         </td>
+						{% if is_granted('ROLE_ADMIN') %}
 						<td>
 							<div class="dropdown show">
 								<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									{{pedido.estado}}
 								</a>
-
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 									<a class="dropdown-item" href="{{path('app_estado', {id: pedido.id, estado: 'No procesado'})}}">No procesado</a>
 									<a class="dropdown-item" href="{{path('app_estado', {id: pedido.id, estado: 'En proceso'})}}">En proceso</a>
 									<a class="dropdown-item" href="{{path('app_estado', {id: pedido.id, estado: 'Enviado'})}}">Enviado</a>
 								</div>
+								
 							</div>
 						</td>
+						{% endif %}
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
+		{% if is_granted('ROLE_USER') %}
 		<div class="d-flex flex-row justify-content-end p-1">
 			<div class="alert alert-info" role="alert">
 				Total:
 				<a href="#" class="alert-link">{{total}}€</a>
 			</div>
 		</div>
+		{% endif %}
 	</div>
 	<br>
-
 {% endblock %}
