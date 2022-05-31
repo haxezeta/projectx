@@ -65,7 +65,7 @@ class ProductoController extends AbstractController
         ]);
     }
 
-    //FUNCION CREAR PRODUCTO
+    //FUNCION BORRAR PRODUCTO
     #[Route('/borrar/{id}', name: 'borrar')]
     public function borrarProducto($id, ProductoRepository $productoRepository)
     {
