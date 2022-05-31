@@ -127,31 +127,15 @@
 											<g></g>
 										</svg>
 									</a>
-										<a href="{{path('app_registro')}}">
-										<button class="btn  my-2 my-sm-0 glyphicon glyphicon-off nav_search-btn">
-											
-												<i class="fa fa-search" aria-hidden="true"></i>
-										</button>
-										</a>
-									{# <a href="{{path('app_registro')}}" class="order_online">
-																			Registrarse
-																		</a> #}
+									
 									{% if app.user %}
-										{# <div class="mb-3">
-											Te has logueado como
-											{{ app.user.userIdentifier }},
-											<a href="{{ path('app_logout') }}">Logout</a>
-										</div> #}
+
 										<a href="{{path('app_logout')}}" class="order_online">
 																			LOGOUT <br>{{ app.user.userIdentifier }}
 																		</a>
 									{% endif %}
 									{% if not app.user %}
-										{# <div class="mb-3">
-											Te has logueado como
-											{{ app.user.userIdentifier }},
-											<a href="{{ path('app_logout') }}">Logout</a>
-										</div> #}
+
 										<a href="{{path('app_registro')}}" class="order_online">
 																			Registrarse
 																		</a>

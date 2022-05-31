@@ -11,14 +11,12 @@
 
 
 {% block body %}
-	<br>
 	<div class="container">
-		<h2>Lista de productos</h2>
-		<br>
-		<table class="table table-striped">
+		<h2 class="mt-5">Lista de productos</h2>
+		<table class="table table-striped mb-5">
 			<thead>
 				<tr>
-					<td>Nr</td>
+					<td>Nº</td>
 					<td>Nombre</td>
 					<td>Descripcion</td>
 					<td>Categoria</td>
@@ -66,7 +64,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<a href="{{ path ('producto.crear')}}">
+		<a class="mt-5" href="{{ path ('producto.crear')}}">
 			<button type="button" class="btn btn-primary">Añadir</button>
 		</a>
 	</div>

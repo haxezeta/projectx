@@ -36,9 +36,14 @@ class PedidoController extends AbstractController
     {
         $pedido = new Pedido();
 
-        $user = $this->getUser()->getUserIdentifier();
+        
+        $user = $this->getUser();
 
-        $pedido->setUsuario($user);
+        if($user == null) {
+            return $this->redirect($this->generateUrl('app_login'));
+        }
+
+        $pedido->setUsuario($user->getUserIdentifier());
         $pedido->setNombre($producto->getNombre());
         $pedido->setPedido($producto->getId());
         $pedido->setPrecio($producto->getPrecio());
