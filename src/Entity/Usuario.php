@@ -66,7 +66,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // Todos los usuarios tendran este rol
-        $roles[] = 'ROLE_USER';
+        // $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -74,7 +74,8 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
+        // Todos los usuarios tendran este rol
+        // $roles[] = 'ROLE_USER';
         return $this;
     }
 

@@ -40,6 +40,7 @@ class RegistroController extends AbstractController
                 $datos = $registroForm->getData();
                 $usuario = new Usuario();
                 $usuario->setEmail($datos['email']);
+                $usuario->setRoles(['ROLE_USER']);
                 $usuario->setPassword(
                     $passwordHasher->hashPassword($usuario, $datos['password'])
                 );
