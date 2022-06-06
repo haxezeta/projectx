@@ -12,7 +12,7 @@ Proyecto ZGAMING
 # ZGAMING - APP para administración de tienda GAMING
 
 
-Enlace a la aplicación desplegada: https://adist-app.herokuapp.com/
+Enlace a la aplicación desplegada: https://zgaming.herokuapp.com/
 
 
 ## Despliegue 📦
